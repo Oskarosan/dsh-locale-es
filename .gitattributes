@@ -1,0 +1,9 @@
+# Todos los ficheros del repositorio se guardan con saltos de línea LF: las
+# herramientas generan `lib/client.js` y `cordis.patch.yml` con LF, y la
+# integración continua comprueba que el bundle versionado coincide byte a byte
+# con las fuentes de traducción.
+* text=auto eol=lf
+*.cjs text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.yml text eol=lf

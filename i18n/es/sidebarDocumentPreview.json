@@ -1,0 +1,26 @@
+{
+  "sidebarDocumentPreview": {
+    "loading": "Procesando el documento...",
+    "loadMore": "Cargar más",
+    "changed": "El archivo ha cambiado; se muestra el contenido anterior.",
+    "reloadNow": "Recargar",
+    "reload": "Volver a leer el archivo",
+    "autoRefresh": "Actualización automática",
+    "autoRefresh.enable": "Activar la actualización automática",
+    "autoRefresh.disable": "Desactivar la actualización automática",
+    "wrap.enable": "Activar el ajuste de línea",
+    "wrap.disable": "Desactivar el ajuste de línea",
+    "wrap.aria": "Ajuste de línea",
+    "openWith": "Abrir con",
+    "viewer.text": "Texto sin formato",
+    "resourceUnavailable": "El servicio de recursos de archivos no está disponible.",
+    "rendererUnavailable": "La vista previa de {name} no está disponible.",
+    "unsupportedFile": "La vista previa aún no está disponible para este tipo de archivo.",
+    "error.notFound": "No se encontró el archivo. Es posible que se haya movido o eliminado.",
+    "error.tooLarge": "Esta página supera el límite de {limit} y no se puede leer.",
+    "error.notText": "La vista previa aún no está disponible para este tipo de archivo.",
+    "error.notRegularFile": "No es un archivo normal; no hay nada que mostrar.",
+    "error.unavailable": "Falló la lectura: {message}",
+    "retry": "Reintentar"
+  }
+}

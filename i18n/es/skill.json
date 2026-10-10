@@ -1,0 +1,12 @@
+{
+  "skill": {
+    "row.title": "Skill",
+    "row.running": "Cargando la skill",
+    "row.preparing": "Preparando la carga de una skill",
+    "row.failed": "Error al cargar la skill",
+    "row.stopped": "Carga de la skill detenida",
+    "row.instructions": "Instrucciones",
+    "row.inspect": "Inspeccionar",
+    "menu.userOnly": "solo para el usuario"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "directory-browser": {
+    "browser.title": "Seleccionar el directorio del espacio de trabajo",
+    "browser.home": "Inicio",
+    "browser.newFolder": "Nueva carpeta",
+    "browser.folderName": "Nombre de la carpeta",
+    "browser.createIn": "Nueva carpeta en \"{name}\"",
+    "browser.untitledFolder": "Carpeta sin título",
+    "browser.create": "Crear",
+    "browser.cancel": "Cancelar",
+    "browser.open": "Abrir",
+    "browser.editPath": "Editar la ruta",
+    "browser.loading": "Cargando…",
+    "browser.truncated": "Demasiadas carpetas para listarlas; solo se muestra el principio.",
+    "browser.showHidden": "Mostrar los archivos ocultos"
+  }
+}

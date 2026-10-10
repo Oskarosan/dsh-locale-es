@@ -1,0 +1,36 @@
+# Integración continua del pack castellano: comprueba la cobertura, audita las
+# claves, reconstruye el bundle y verifica que el fichero versionado coincide con
+# las fuentes de traducción (si alguien traduce y no reconstruye, falla aquí).
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  pack:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Cobertura y marcadores
+        run: node tools/build-locale-pack.cjs i18n/catalog.json i18n/es . --check
+
+      - name: Auditoría de claves y ficheros
+        run: node tools/audit-es.cjs i18n/catalog.json i18n/es
+
+      - name: Nada de la máquina local en los datos publicados
+        run: node tools/check-portable.cjs i18n
+
+      - name: Reconstruir el bundle
+        run: node tools/build-locale-pack.cjs i18n/catalog.json i18n/es .
+
+      - name: El bundle versionado coincide con las fuentes
+        run: git diff --exit-code
+
+      - name: Ejecutar el bundle como lo hace DSH
+        run: node tools/verify-pack.cjs lib/client.js

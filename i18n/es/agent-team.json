@@ -1,0 +1,29 @@
+{
+  "agent-team": {
+    "trigger": "Equipo de agentes",
+    "loading": "Cargando el equipo…",
+    "unavailable": "El equipo no está disponible",
+    "failure": "Registro de equipo guardado no válido: {message}",
+    "empty": "Aún no hay tareas compartidas. Créalas desde la conversación.",
+    "roster": "Miembros",
+    "tasks": "Tareas compartidas",
+    "model": "Modelo",
+    "open": "Abrir la conversación del miembro",
+    "current": "Chat actual",
+    "owner": "Responsable",
+    "unowned": "Sin responsable",
+    "blockedBy": "Bloqueada por",
+    "writeScopes": "Ámbitos de escritura",
+    "ready": "Preparada",
+    "blocked": "Bloqueada por dependencias",
+    "task.expand": "Mostrar más",
+    "task.collapse": "Mostrar menos",
+    "memberStatus.running": "En ejecución",
+    "memberStatus.inactive": "Inactivo",
+    "memberStatus.provisioning": "Aprovisionando",
+    "memberStatus.failed": "Fallido",
+    "status.pending": "Pendiente",
+    "status.in_progress": "En curso",
+    "status.completed": "Completada"
+  }
+}

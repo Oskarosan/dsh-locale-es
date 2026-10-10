@@ -1,0 +1,9 @@
+{
+  "sidebar": {
+    "session.new": "Nueva sesión",
+    "session.new.label": "Nueva sesión",
+    "toggle.open": "Abrir la barra lateral",
+    "toggle.collapse": "Contraer la barra lateral",
+    "panels.label": "Paneles globales"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "sidebarFiles": {
+    "shortcut.noSession": "Selecciona primero una sesión",
+    "type.label": "Archivos",
+    "guide.title": "Archivos del espacio de trabajo",
+    "guide.description": "Explora los archivos del espacio de trabajo de esta sesión",
+    "loading": "Leyendo…",
+    "empty": "Directorio vacío",
+    "truncated": "Demasiadas entradas; solo se muestran algunas.",
+    "noWorkspace": "Esta sesión no tiene directorio de espacio de trabajo.",
+    "reload": "Recargar",
+    "autoRefresh": "Actualización automática",
+    "autoRefresh.enable": "Habilitar la actualización automática",
+    "autoRefresh.disable": "Deshabilitar la actualización automática",
+    "entry.other": "No es un archivo ni un directorio, por lo que no se puede abrir.",
+    "error.notFound": "Ese directorio ya no existe. Es posible que se haya movido o eliminado.",
+    "error.outsideWorkspace": "Ese directorio está fuera del espacio de trabajo, por lo que la barra lateral no lo leerá.",
+    "error.notDirectory": "Eso no es un directorio.",
+    "error.unavailable": "Error de lectura: {message}"
+  }
+}

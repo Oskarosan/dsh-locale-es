@@ -1,0 +1,13 @@
+{
+  "slash.menu": {
+    "command": "Comandos",
+    "skill": "Skills",
+    "subagent": "Subagentes",
+    "loading": "Cargando…",
+    "drill.aria": "Explorar la carpeta",
+    "drill.hint": "Explorar la carpeta",
+    "drill.key": "Tab",
+    "crumbs.aria": "Navegación por carpetas",
+    "suggestions.aria": "Sugerencias de activación"
+  }
+}

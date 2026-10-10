@@ -1,0 +1,8 @@
+node_modules/
+_i18n/
+_out/
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+desktop.ini

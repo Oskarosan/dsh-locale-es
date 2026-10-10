@@ -1,0 +1,9 @@
+{
+  "settings.plugins": {
+    "nav": "Plugins integrados",
+    "title": "Plugins integrados",
+    "intro": "Inspecciona los plugins que incluye esta implementación.",
+    "tabs": "Vistas de plugins",
+    "empty": "Esta implementación no expone ninguna vista de plugins."
+  }
+}

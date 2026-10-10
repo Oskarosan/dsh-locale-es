@@ -1,0 +1,61 @@
+{
+  "name": "dsh-locale-es",
+  "version": "1.0.0",
+  "description": "Pack de idioma castellano (es) para la interfaz de DeepSeek Harness",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/client.js",
+    "cordis.patch.yml"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-locale"
+      ],
+      "platform": "web"
+    }
+  },
+  "license": "MIT",
+  "author": "Oskarosan",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Oskarosan/dsh-locale-es.git"
+  },
+  "homepage": "https://github.com/Oskarosan/dsh-locale-es#readme",
+  "bugs": {
+    "url": "https://github.com/Oskarosan/dsh-locale-es/issues"
+  },
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "deepseek",
+    "locale",
+    "language-pack",
+    "i18n",
+    "spanish",
+    "castellano",
+    "es"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "node tools/build-locale-pack.cjs i18n/catalog.json i18n/es .",
+    "check": "node tools/build-locale-pack.cjs i18n/catalog.json i18n/es . --check",
+    "audit": "node tools/audit-es.cjs i18n/catalog.json i18n/es",
+    "verify": "node tools/verify-pack.cjs lib/client.js",
+    "test": "npm run check && npm run verify"
+  }
+}
