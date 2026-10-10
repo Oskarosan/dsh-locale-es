@@ -163,8 +163,11 @@ const pkg = {
     './client': './lib/client.js',
     './cordis.patch.yml': './cordis.patch.yml',
     './package.json': './package.json',
+    // DSH resuelve `locale/en.json` y sus hermanos a traves de este mapa: sin
+    // esta linea, la tarjeta del plugin se queda sin titulo ni descripcion.
+    './locale/*.json': './locale/*.json',
   },
-  files: ['lib/index.js', 'lib/client.js', 'cordis.patch.yml'],
+  files: ['lib/index.js', 'lib/client.js', 'cordis.patch.yml', 'locale', 'icon.svg'],
   dsh: {
     bundle: { patch: './cordis.patch.yml' },
     client: { inject: ['@deepseek-ai/dsh-client-locale'], platform: 'web' },
@@ -174,15 +177,15 @@ const pkg = {
 /*
  * El package.json del paquete es a la vez contrato con el cargador y ficha
  * publica del proyecto. Los campos estructurales los fija SIEMPRE este
- * generador; el resto (licencia, repositorio, autor, palabras clave, scripts)
- * se conserva del fichero que ya exista, para que reconstruir no borre la
- * ficha del repositorio.
+ * generador; el resto (licencia, repositorio, autor, palabras clave, scripts,
+ * icono) se conserva del fichero que ya exista, para que reconstruir no borre
+ * la ficha del repositorio.
  */
 const ESTRUCTURALES = new Set(['name', 'type', 'main', 'exports', 'files', 'dsh']);
 const CONSERVABLES = [
   'version', 'private', 'description', 'license', 'author', 'contributors',
   'repository', 'homepage', 'bugs', 'keywords', 'engines', 'scripts',
-  'publishConfig', 'dependencies', 'devDependencies',
+  'publishConfig', 'dependencies', 'devDependencies', 'icon', 'peerDependencies',
 ];
 const pkgPath = path.join(outDir, 'package.json');
 let previo = {};

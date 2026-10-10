@@ -5,6 +5,21 @@ acoge a [Versionado semántico](https://semver.org/lang/es/): la versión mayor 
 cambia el contrato con el Loader de DSH, la menor al añadir idioma o cobertura, y la de
 parche al corregir traducciones.
 
+## [1.0.1] — 2026-10-10
+
+### Añadido
+
+- **Metadatos de tarjeta** para el gestor de plugins de DSH: `locale/en.json` y `locale/es.json`
+  con `meta.title` y `meta.description`, más un icono `icon.svg`.
+- `exports["./locale/*.json"]` en el `package.json` —sin esa entrada el resolutor ESM de DSH no
+  encuentra los ficheros de idioma y la tarjeta sale sin título ni descripción— y el campo
+  `icon` de nivel superior, que es donde DSH lo busca.
+- `tools/check-plugin-meta.cjs`: replica las comprobaciones que hace DSH sobre el `package.json`
+  (bundle, mitad de cliente, mapa de exports, diccionarios e icono) y corre en la integración
+  continua.
+- Documentación de la instalación por el gestor de plugins
+  (`dsh plugin --profile <perfil> add …`) y de qué busca DSH para listar un plugin.
+
 ## [1.0.0] — 2026-10-10
 
 Primera publicación.

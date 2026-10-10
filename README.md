@@ -29,8 +29,33 @@ node tools/verify-pack.cjs lib/client.js                               # ejecuta
 
 ## Instalación
 
-El perfil de DSH manda: los plugins se declaran en `~/.dsh/profiles/<perfil>/package.json`.
-Añade el pack como dependencia **y** como bundle del perfil:
+Hay dos caminos. El corto usa el gestor de plugins que trae DSH; el manual edita el perfil.
+
+### Vía corta: el gestor de plugins
+
+En la interfaz: barra lateral → **Plugins** → **Add plugin**, y pega la especificación. O desde
+la terminal, con el mismo resultado:
+
+```powershell
+# por nombre, si el paquete está publicado en npm
+dsh plugin --profile desktop add dsh-locale-es
+
+# directamente desde GitHub, sin publicar nada
+dsh plugin --profile desktop add github:Oskarosan/dsh-locale-es
+
+# o desde una copia local
+dsh plugin --profile desktop add C:\ruta\a\dsh-locale-es
+```
+
+El gestor acepta nombre de paquete npm (con versión opcional), `github:autor/repo` o una URL de
+repositorio git, un `.tgz` y una ruta local. Antes de instalar comprueba que el paquete declare
+`dsh.bundle`; al terminar lo añade a `dsh.profile.bundles` del perfil. Después, recarga la
+interfaz y elige el idioma en **Ajustes → General → Idioma → Español**.
+
+### Vía manual: editar el perfil
+
+Los plugins de un perfil se declaran en `~/.dsh/profiles/<perfil>/package.json`. Añade el pack
+como dependencia **y** como bundle:
 
 ```json
 {
@@ -55,12 +80,24 @@ Después, en la carpeta del perfil:
 pnpm install
 ```
 
-y recarga la interfaz. El idioma se elige en **Ajustes → General → Idioma → Español**.
+### Qué busca DSH para listar un plugin
 
-Notas de la instalación:
+Comprobado en el código de la aplicación (0.2.0-rc.2), por si hay que diagnosticar una tarjeta
+que no aparece:
 
-- La ruta `link:` es la vía **verificada**. El protocolo `github:Oskarosan/dsh-locale-es`
-  debería funcionar igual (pnpm lo resuelve con git), pero no está probado aquí.
+- `dsh.bundle.patch` en el `package.json` — **imprescindible**: sin ese campo el paquete se
+  instala como dependencia plana, no como capa del perfil.
+- La tarjeta se pinta con los metadatos que DSH lee de `locale/<idioma>.json`
+  (`meta.title`, `meta.description`), con el `name` y la `description` del `package.json` como
+  respaldo; el icono sale del campo `icon` de nivel superior. Para que el resolutor ESM los
+  encuentre, el mapa `exports` tiene que declarar `./locale/*.json` y `./package.json`.
+- `tools/check-plugin-meta.cjs` replica esas comprobaciones y corre en la integración continua.
+- DSH **no** lee las palabras clave de npm ni consulta ningún catálogo propio: no hay nada que
+  «indexar». El descubrimiento es el README, npm o el directorio de la comunidad.
+
+### Notas
+
+- La ruta `link:` y `github:` están soportadas por pnpm; la primera es la que está probada aquí.
 - El fichero [cordis.patch.yml](cordis.patch.yml) del paquete es lo que inserta la fila
   `locale-es` en el árbol de plugins; lo aplica DSH al cargar el bundle, no hay que copiarlo
   a mano.
@@ -69,6 +106,8 @@ Notas de la instalación:
 - **Aviso comprobado:** si modificas el perfil **desde dentro de una sesión de DSH**, la
   recarga en caliente dispone esa sesión y la aplicación abre una conversación nueva. Hazlo
   desde fuera o asume que esa conversación se corta (el historial no se pierde).
+- El rescate «Disable third-party plugins» del escritorio deja el perfil con los bundles de
+  fábrica, así que se lleva por delante este pack: para volver a tenerlo hay que reinstalarlo.
 
 ## Cómo funciona
 
@@ -110,6 +149,10 @@ dsh-locale-es/
 ├── i18n/
 │   ├── catalog.json        catálogo inglés extraído de la app (claves + textos de origen)
 │   └── es/<namespace>.json un fichero por namespace con la traducción castellana
+├── locale/
+│   ├── en.json             metadatos de la tarjeta del plugin (meta.title / meta.description)
+│   └── es.json             los mismos metadatos en castellano
+├── icon.svg                icono de la tarjeta (relativo, ≤256 KiB, SVG/PNG/JPEG/WebP)
 ├── tools/                  cadena de herramientas, sin dependencias externas
 │   ├── extract-app.cjs          extrae el código de app.asar verificando SHA-256
 │   ├── extract-locale.cjs       extrae los diccionarios en/zh de los plugins de UI
@@ -118,8 +161,9 @@ dsh-locale-es/
 │   ├── build-locale-pack.cjs    emite lib/ y cordis.patch.yml, e informa de la cobertura
 │   ├── audit-es.cjs             busca claves ausentes, ficheros mal alineados y repetidas
 │   ├── check-portable.cjs       evita publicar rutas de la máquina que extrajo el catálogo
+│   ├── check-plugin-meta.cjs    comprueba lo que DSH exige para listar el plugin
 │   └── verify-pack.cjs          ejecuta el bundle en un cargador simulado y lo comprueba
-├── .github/workflows/ci.yml     cobertura, auditoría, portabilidad y bundle sincronizado
+├── .github/workflows/ci.yml     cobertura, auditoría, portabilidad, metadatos y bundle sincronizado
 └── CONTRIBUTING.md · NOTICE.md · CHANGELOG.md · LICENSE · README.md
 ```
 

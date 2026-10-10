@@ -26,6 +26,9 @@ jobs:
       - name: Nada de la máquina local en los datos publicados
         run: node tools/check-portable.cjs i18n
 
+      - name: Metadatos de la tarjeta del plugin
+        run: node tools/check-plugin-meta.cjs .
+
       - name: Reconstruir el bundle
         run: node tools/build-locale-pack.cjs i18n/catalog.json i18n/es .
 
