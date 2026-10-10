@@ -110,15 +110,17 @@ dsh-locale-es/
 ├── i18n/
 │   ├── catalog.json        catálogo inglés extraído de la app (claves + textos de origen)
 │   └── es/<namespace>.json un fichero por namespace con la traducción castellana
-└── tools/                  cadena de herramientas, sin dependencias externas
-    ├── extract-app.cjs          extrae el código de app.asar verificando SHA-256
-    ├── extract-locale.cjs       extrae los diccionarios en/zh de los plugins de UI
-    ├── split-batches.cjs        reparte el catálogo en lotes para traducir en paralelo
-    ├── split-by-namespace.cjs   convierte los lotes en un fichero por namespace
-    ├── build-locale-pack.cjs    emite lib/ y cordis.patch.yml, e informa de la cobertura
-    ├── audit-es.cjs             busca claves ausentes, ficheros mal alineados y repetidas
-    ├── check-portable.cjs       evita publicar rutas de la máquina que extrajo el catálogo
-    └── verify-pack.cjs          ejecuta el bundle en un cargador simulado y lo comprueba
+├── tools/                  cadena de herramientas, sin dependencias externas
+│   ├── extract-app.cjs          extrae el código de app.asar verificando SHA-256
+│   ├── extract-locale.cjs       extrae los diccionarios en/zh de los plugins de UI
+│   ├── split-batches.cjs        reparte el catálogo en lotes para traducir en paralelo
+│   ├── split-by-namespace.cjs   convierte los lotes en un fichero por namespace
+│   ├── build-locale-pack.cjs    emite lib/ y cordis.patch.yml, e informa de la cobertura
+│   ├── audit-es.cjs             busca claves ausentes, ficheros mal alineados y repetidas
+│   ├── check-portable.cjs       evita publicar rutas de la máquina que extrajo el catálogo
+│   └── verify-pack.cjs          ejecuta el bundle en un cargador simulado y lo comprueba
+├── .github/workflows/ci.yml     cobertura, auditoría, portabilidad y bundle sincronizado
+└── CONTRIBUTING.md · NOTICE.md · CHANGELOG.md · LICENSE · README.md
 ```
 
 ## Flujo de trabajo
@@ -131,20 +133,21 @@ dsh-locale-es/
 3. Reconstruye y comprueba:
 
 ```powershell
-node tools/build-locale-pack.cjs i18n/catalog.json i18n/es . --check
-node tools/build-locale-pack.cjs i18n/catalog.json i18n/es .
-node tools/verify-pack.cjs lib/client.js
+node tools/build-locale-pack.cjs i18n/catalog.json i18n/es . --check   # cobertura y marcadores
+node tools/audit-es.cjs i18n/catalog.json i18n/es                      # claves ausentes y repetidas
+node tools/build-locale-pack.cjs i18n/catalog.json i18n/es .           # regenera lib/
+node tools/verify-pack.cjs lib/client.js                               # el bundle carga como en DSH
 ```
 
 `--check` sale con código 1 si falta alguna clave o hay marcadores mal, así que sirve como
-puerta en integración continua.
+puerta en integración continua, igual que `audit-es.cjs`.
 
 ### Actualizar el catálogo tras una actualización de DSH
 
 ```powershell
 node tools/extract-app.cjs "C:\ruta\a\resources\app.asar" _referencia-dsh
 node tools/extract-locale.cjs _referencia-dsh/dsh/node_modules/@deepseek-ai i18n/catalog.json
-node tools/check-portable.cjs i18n                                     # el catalogo no lleva rutas locales
+node tools/check-portable.cjs i18n                                     # el catálogo no lleva rutas locales
 node tools/build-locale-pack.cjs i18n/catalog.json i18n/es . --check   # lista lo nuevo por traducir
 ```
 
